@@ -3,7 +3,7 @@
     <section role="tabpanel" aria-labelledby="tab-litterature">
         <img src="/img/loisir-litterature.jpg" alt="Illustration d’une bibliothèque littéraire classique et moderne"
             class="category-image" />
-        <SubSection id="litt-voyage-occident" title="Voyage en Occident / Dragon Ball" image="" alt=""
+        <SubSection id="litt-voyage-occident" title="Voyage en Occident" image="" alt=""
             content="Pont entre culture chinoise et pop, du Roi des Singes à Son Goku !" />
         <SubSection id="litt-virgile" title="Virgile" image="" alt=""
             content="Lecture de l’Énéide, poème fondateur du génie antique." />

@@ -23,7 +23,7 @@
           📱 Ajouter à l’accueil mobile
         </button>
         <button class="site-link-button" aria-label="Visiter notre profile LinkedIn"><a class="site-link"
-            href="https://www.linkedin.com/in/louis-rouanet/">Visiter notre profile <i>LinkedIn</i></a></button>
+            href="https://www.linkedin.com/in/louis-rouanet/" target="_blank">Visiter notre profile <i>LinkedIn</i></a></button>
       </aside>
 
       <section class="content-area">
