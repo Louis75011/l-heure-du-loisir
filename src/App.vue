@@ -9,10 +9,21 @@
           Centres d’intérêt augmentés, appuyant notre CV.
         </h2>
         <p class="site-desc">
-          L’Heure du loisir se présente tel un petit carnet vivant de centres d’intérêt augmentés, à mi-chemin entre la contemplation et l'activité. Entre sentier et réflexions, cette page déroule un Curriculum Ludique : la natation côtoie la randonnée ; la veille technologique s'enracine dans l'actualité ; le patrimoine, notamment parisien, y est redécouvert brièvement ; et la littérature – de Virgile à Dragon Ball (!), en passant par Anatole France – y tisse un pont entre Orient et Occident. À la croisée de Cultura & Natura, ces loisirs studieux ou divertissements ne sont pas de simples passe-temps, mais des lieux entre la curiosité des choses de l’esprit.
+          L’Heure du loisir se présente tel un petit carnet vivant de centres d’intérêt augmentés, à mi-chemin entre la
+          contemplation et l'activité. Entre sentier et réflexions, cette page déroule un Curriculum Ludique : la
+          natation côtoie la randonnée ; la veille technologique s'enracine dans l'actualité ; le patrimoine, notamment
+          parisien, y est redécouvert brièvement ; et la littérature – de Virgile à Dragon Ball (!), en passant par
+          Anatole France – y tisse un pont entre Orient et Occident. À la croisée de Cultura & Natura, ces loisirs
+          studieux ou divertissements ne sont pas de simples passe-temps, mais des lieux entre la curiosité des choses
+          de l’esprit.
         </p>
-        <button aria-label="Ajouter à l'écran d'accueil">Ajouter à l’accueil</button>
-        <button class="site-link-button" aria-label="Visiter notre profile LinkedIn"><a class="site-link" href="https://www.linkedin.com/in/louis-rouanet/">Visiter notre profile <i>LinkedIn</i></a></button>
+        <!-- v-if="showInstallButton" -->
+        <button @click="installApp" class="install-button"
+          aria-label="Ajouter à l'écran d'accueil">
+          📱 Ajouter à l’accueil mobile
+        </button>
+        <button class="site-link-button" aria-label="Visiter notre profile LinkedIn"><a class="site-link"
+            href="https://www.linkedin.com/in/louis-rouanet/">Visiter notre profile <i>LinkedIn</i></a></button>
       </aside>
 
       <section class="content-area">
@@ -24,6 +35,34 @@
 
 <script setup lang="ts">
 import Tabs from './components/Tabs.vue';
+import { onMounted, ref } from 'vue';
+
+const deferredPrompt = ref<Event | null>(null);
+const showInstallButton = ref(false);
+
+onMounted(() => {
+  // Capture l’événement d'installation différée (Android/Chrome)
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt.value = e;
+    showInstallButton.value = true;
+  });
+});
+
+const installApp = async () => {
+  if (deferredPrompt.value) {
+    const promptEvent = deferredPrompt.value as any;
+    promptEvent.prompt();
+    const choiceResult = await promptEvent.userChoice;
+    if (choiceResult.outcome === 'accepted') {
+      console.log('L’utilisateur a accepté l’installation');
+    } else {
+      console.log('L’utilisateur a refusé l’installation');
+    }
+    showInstallButton.value = false;
+    deferredPrompt.value = null;
+  }
+};
 </script>
 
 <style scoped lang="scss">
@@ -32,12 +71,29 @@ import Tabs from './components/Tabs.vue';
 }
 
 @keyframes colorCycle {
-  0%   { color: #88c9f9; }
-  20%  { color: #4c8856; }
-  40%  { color: #6c6e74; }
-  60%  { color: #c48b6a; }
-  80%  { color: #f7e3c2; }
-  100% { color: #88c9f9; }
+  0% {
+    color: #88c9f9;
+  }
+
+  20% {
+    color: #4c8856;
+  }
+
+  40% {
+    color: #6c6e74;
+  }
+
+  60% {
+    color: #c48b6a;
+  }
+
+  80% {
+    color: #f7e3c2;
+  }
+
+  100% {
+    color: #88c9f9;
+  }
 }
 
 main {
@@ -101,6 +157,7 @@ main {
   button {
     margin-top: 0.5rem;
     padding: 0.6rem 1.4rem;
+    width: 275px;
     background-color: #2c3e50;
     color: white;
     border: none;
@@ -131,6 +188,17 @@ main {
 
   .content-area {
     padding: 1rem 0;
+  }
+}
+
+.install-button {
+  background-color: #c48b6a;
+  color: #fff;
+  font-size: 1rem;
+  margin-top: 1rem;
+
+  &:hover {
+    background-color: #88c9f9;
   }
 }
 </style>
