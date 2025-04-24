@@ -1,45 +1,104 @@
-# l-heure-du-loisir
+# 🏞️ L’Heure du loisir
 
-This template should help get you started developing with Vue 3 in Vite.
+**Curriculum ludique, loisirs enracinés et présentation augmentée en ligne.**  
+[Démo locale] : http://localhost:5173/  
+[Déploiement Vercel] : à venir (voir infra)
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## ✨ Présentation
 
-## Type Support for `.vue` Imports in TS
+**L’Heure du loisir** se veut une application web personnelle à la fois contemplative et interactive, destinée à exposer de façon moderne et raffinée ses centres d’intérêt – entre culture, sport, technologie et littérature.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+Pensée comme un **CV augmenté** ou un carnet thématique dynamique, cette interface met en valeur des **activités choisies** dans un cadre accessible, animé et bien structuré.
 
-## Customize configuration
+---
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## 🧱 Fonctionnalités clés
 
-## Project Setup
+- 🎯 **Système à onglets dynamiques** (`Vue.js`) :  
+  Présentation fluide de 4 grandes catégories (Sports, Tech, Culture, Littérature) avec contenus injectés à la volée via `v-for` et `<component :is="...">`.
 
-```sh
+- 📱 **Responsive & PWA** (Progressive Web App) :  
+  L’application peut être **installée sur mobile** (Android et iOS) comme une app autonome. Elle propose un **bouton d’ajout à l’accueil** si elle détecte un support compatible (`beforeinstallprompt`).
+
+- ♿ **Accessibilité native** avec `ARIA roles` :  
+  Chaque onglet, panneau ou contenu est annoté pour une parfaite lecture par les technologies d’assistance (narrateurs, lecteurs d’écran).
+
+- 🧪 **Tests unitaires** (`Vitest`, `@vue/test-utils`) :  
+  Couverture des composants principaux : `App.vue`, `Tabs.vue`, `SubSection.vue`. Les tests vérifient la présence d’éléments structurants, le comportement des onglets, et l'injection correcte des sous-composants.
+
+- 🎨 **Design responsive et stylé SCSS** :  
+  Composants stylisés avec SCSS modulaire, responsivité dès 768px, alternance des couleurs animée pour les titres.
+
+- 🧠 **Usage d’IA générative (DALL·E)** pour les illustrations d’univers littéraires ou imaginaires (non intégrée automatiquement dans ce repo mais simulée dans le contenu).
+
+- 🗂️ **Déploiement continu avec Git & Vercel** :  
+  Le projet est versionné sur [GitHub](https://github.com/Louis75011/l-heure-du-loisir), avec gestion propre des clés SSH (`.ssh/config`) et build automatique via Vercel (compatibilité Vite).
+
+---
+
+## 🧭 Arborescence des sections
+
+- **Sports** : Piscine, Randonnée
+- **Tech** : PWA, Accessibilité ARIA, Tests unitaires, IA générative
+- **Culture** : Patrimoine parisien (Tour Eiffel, Conciergerie)
+- **Littérature** : Voyage en Occident, Virgile, Anatole France
+
+---
+
+## 🚀 Installation locale
+
+```bash
+git clone git@github.com:Louis75011/l-heure-du-loisir.git
+cd l-heure-du-loisir
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
+🧪 Lancer les tests
+bash
+Copier
+Modifier
+npx vitest run
+📦 Déploiement Vercel (fix)
+Si des erreurs apparaissent dans vue-tsc au build :
 
-```sh
-npm run build
-```
+Exclure tests du tsconfig.json :
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+json
+Copier
+Modifier
+"exclude": ["tests", "node_modules"]
+Installer les types :
 
-```sh
-npm run test:unit
-```
+bash
+Copier
+Modifier
+npm install --save-dev vitest @testing-library/jest-dom @types/node
+Ajouter à tsconfig.json :
 
-### Lint with [ESLint](https://eslint.org/)
+json
+Copier
+Modifier
+"compilerOptions": {
+  "types": ["vitest"]
+}
+📜 Licence
+Projet personnel librement consultable, à but démonstratif.
+Toute adaptation ou réutilisation doit mentionner l’auteur : Louis Rouanet.
 
-```sh
-npm run lint
-```
+🖋️ Remerciements
+Projet structuré avec goût, syntaxe, et rigueur grâce à l’usage concerté de :
+
+Vue 3 + SCSS
+
+PWA APIs (Web App Manifest & Service Worker)
+
+Accessibilité by design (WAI-ARIA)
+
+CI/CD avec Git SSH & Vercel
+
+Vitest + Vue Testing Library
+
+🎓 En résumé :
+Un site personnel, mais exemplaire, démontrant ce que peut être un portfolio enraciné et modernisé, fidèle au principe de Cultura et Natura.
